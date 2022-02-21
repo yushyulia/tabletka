@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".RegisterActivity">
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:layout_marginTop="50dp"
+        />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Имя"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/email"
+        />
+
+    <EditText
+        android:id="@+id/birthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:hint="Дата рождения"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/name"
+        />
+
+    <EditText
+        android:id="@+id/weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Вес"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/birthday"
+        />
+
+    <EditText
+        android:id="@+id/passwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Пароль"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/weight"
+        android:inputType="textPassword"
+        />
+
+    <EditText
+        android:id="@+id/rePasswd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Повторите пароль"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/passwd"
+        android:inputType="textPassword"
+        />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Зарегистрироваться"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/rePasswd">
+    </Button>
+
+</RelativeLayout>
