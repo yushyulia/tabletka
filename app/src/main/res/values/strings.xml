@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="tabletka_id">Таблетка</string>
+    <string name="welcome_id">Добро пожаловать!</string>
+    <string name="log_in_id">Войдите, чтобы не забывть принимать лекарства</string>
+    <string name="hint_email_id">Введите email</string>
+    <string name="hint_password_id">Введите пароль</string>
+    <string name="enter_button_id">Войти</string>
+    <string name="regist_button_id">Зарегистрироваться</string>
+    <string name="foget_button_id">Забыли пароль?</string>
+    <string name="withoutregistr_button_id">Войти без регистрации</string>
 </resources>
