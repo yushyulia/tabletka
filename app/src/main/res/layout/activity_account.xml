@@ -7,4 +7,15 @@
     android:padding="10dp"
     tools:context=".AccountActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="144dp"
+        android:layout_marginEnd="149dp"
+        android:layout_marginBottom="426dp"
+        android:text="Аккаунт" />
 </RelativeLayout>

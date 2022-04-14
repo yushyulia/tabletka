@@ -1,69 +1,115 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText email,user_name,birthday,weight,passwd,repasswd;
-    Button btn_register;
-    DBHelper DB;
+    EditText email, name, birthday, weight, password, rePassword;
+    Button register;
+    FirebaseAuth auth;
+    FirebaseDatabase db;
+    DatabaseReference users;
+
+    Date dateObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        email = (EditText) findViewById(R.id.email);
-        user_name =(EditText) findViewById(R.id.name);
-        birthday=(EditText) findViewById(R.id.birthday);
-        weight = (EditText) findViewById(R.id.weight);
-        passwd = (EditText) findViewById(R.id.passwd);
-        repasswd = (EditText) findViewById(R.id.rePasswd);
-        btn_register = (Button) findViewById(R.id.btn_register);
-        DB=new DBHelper(this);
+        email = findViewById(R.id.email);
+        name = findViewById(R.id.name);
+        birthday = findViewById(R.id.birthday);
+        weight = findViewById(R.id.weight);
+        password = findViewById(R.id.passwd);
+        rePassword = findViewById(R.id.rePasswd);
+        register = findViewById(R.id.btn_register);
 
-        btn_register.setOnClickListener(new View.OnClickListener() {
+        auth = FirebaseAuth.getInstance();
+        db=FirebaseDatabase.getInstance();
+        users = db.getReference("Users");
+
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = user_name.getText().toString();
-                String userEmail = email.getText().toString();
-                String userBirthday = birthday.getText().toString();
-                Long userWeight = Long.parseLong(weight.getText().toString());
-                String userPasswd = passwd.getText().toString();
-                String userRepass = repasswd.getText().toString();
-
-                if(name.equals("")||userEmail.equals("")||userBirthday.equals("")||userWeight<=0||userPasswd.equals("")||userRepass.equals(""))
-                    Toast.makeText(RegisterActivity.this, "Заполните все поля", Toast.LENGTH_SHORT).show();
-                else{
-                    if(userPasswd.equals(userRepass)){
-                        Boolean checkuser = DB.checkUser(userEmail);
-                        if(!checkuser){
-                            Boolean insert = DB.insertUser(name,userPasswd,userEmail,userBirthday,userWeight);
-                            if(insert){
-                                User user=new User(name,userEmail,userPasswd,userBirthday,userWeight);
-                                Intent intent = new Intent(getApplicationContext(),AccountActivity.class);
-                                intent.putExtra(User.class.getSimpleName(),user);
-                                startActivity(intent);
-                            }
-                            else{
-                                Toast.makeText(RegisterActivity.this,"Что-то пошло не так",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        else {
-                            Toast.makeText(RegisterActivity.this,"К данному email уже привязан аккаунт",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else{
-                        Toast.makeText(RegisterActivity.this,"Пароли не одинаковые",Toast.LENGTH_SHORT).show();
-                    }
+                if(TextUtils.isEmpty(email.getText().toString())){
+                    Toast.makeText(RegisterActivity.this, "Введите email", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                if(TextUtils.isEmpty(name.getText().toString())){
+                    Toast.makeText(RegisterActivity.this, "Введите имя", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(birthday.getText().toString())){
+                    Toast.makeText(RegisterActivity.this, "Введите дату рождения", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(weight.getText().toString())){
+                    Toast.makeText(RegisterActivity.this, "Введите вес", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(password.getText().toString().length()<5){
+                    Toast.makeText(RegisterActivity.this, "Минимальная длина пароля 5 символов", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                auth.createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                                String datee = birthday.getText().toString();
+                                try {
+                                    dateObject = formatter.parse(datee);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                Float w = Float.valueOf(weight.getText().toString());
+
+                                User user = new User (name.getText().toString(),email.getText().toString(),password.getText().toString(),dateObject,w);
+
+                                users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(RegisterActivity.this, "Пользователь добавлен в БД", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(RegisterActivity.this, "Пользователь с таким email уже существует", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
     }

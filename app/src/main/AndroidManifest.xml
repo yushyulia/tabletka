@@ -13,7 +13,7 @@
             android:name=".AccountActivity"
             android:exported="false" />
         <activity
-            android:name=".SingInActivity"
+            android:name=".SignInActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
