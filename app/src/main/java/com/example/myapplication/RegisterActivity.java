@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapplication.Models.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -21,8 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -93,13 +92,14 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                                 Float w = Float.valueOf(weight.getText().toString());
 
-                                User user = new User (name.getText().toString(),email.getText().toString(),password.getText().toString(),dateObject,w);
+                                User user = new User (name.getText().toString(), password.getText().toString(), email.getText().toString(),dateObject,w);
 
                                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                Toast.makeText(RegisterActivity.this, "Пользователь добавлен в БД", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(RegisterActivity.this,AccountActivity.class));
+                                                finish();
                                             }
                                         });
                             }

@@ -1,18 +1,14 @@
-package com.example.myapplication;
+package com.example.myapplication.Models;
 
 import java.util.Date;
 
 public class Medicine {
-    private Integer id;
-    private String name;
+    private String name, applying, units;
     private Float dosage;
-    private String[] units;
-    private String[] applying;
     private Date firstDay;
     private Date lastDay;
 
-    public Medicine(Integer id, String name, Float dosage, String[] units, String[] applying, Date firstDay, Date lastDay) {
-        this.id = id;
+    public Medicine(String name, Float dosage, String units, String applying, Date firstDay, Date lastDay) {
         this.name = name;
         this.dosage = dosage;
         this.units = units;
@@ -21,12 +17,20 @@ public class Medicine {
         this.lastDay = lastDay;
     }
 
-    public Integer getId() {
-        return id;
+    public String getApplying() {
+        return applying;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setApplying(String applying) {
+        this.applying = applying;
+    }
+
+    public String getUnits() {
+        return units;
+    }
+
+    public void setUnits(String units) {
+        this.units = units;
     }
 
     public String getName() {
@@ -43,22 +47,6 @@ public class Medicine {
 
     public void setDosage(Float dosage) {
         this.dosage = dosage;
-    }
-
-    public String[] getUnits() {
-        return units;
-    }
-
-    public void setUnits(String[] units) {
-        this.units = units;
-    }
-
-    public String[] getApplying() {
-        return applying;
-    }
-
-    public void setApplying(String[] applying) {
-        this.applying = applying;
     }
 
     public Date getFirstDay() {

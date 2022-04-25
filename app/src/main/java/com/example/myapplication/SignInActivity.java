@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,8 +24,7 @@ public class SignInActivity extends AppCompatActivity {
     EditText email,password;
     Button register,signIn;
     FirebaseAuth auth;
-    FirebaseDatabase db;
-    DatabaseReference users;
+    FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +35,13 @@ public class SignInActivity extends AppCompatActivity {
         register = findViewById(R.id.btn_register_screen);
         email = findViewById(R.id.user_email);
         password = findViewById(R.id.user_passwd);
-
         auth = FirebaseAuth.getInstance();
-        db=FirebaseDatabase.getInstance();
-        users = db.getReference("Users");
+
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null){
+            startActivity(new Intent(SignInActivity.this,AccountActivity.class));
+            finish();
+        }
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
