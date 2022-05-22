@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.myapplication.Models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,9 +23,8 @@ public class AccountActivity extends AppCompatActivity {
 
     TextView text;
     Button exit;
+    DatabaseReference dbRef;
     FirebaseAuth auth;
-    DatabaseReference users;
-    FirebaseDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,20 @@ public class AccountActivity extends AppCompatActivity {
 
         text = findViewById(R.id.textView);
         exit = findViewById(R.id.exit_btn);
+        dbRef = FirebaseDatabase.getInstance().getReference();
+
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.child(auth.getCurrentUser().getUid()).getValue(User.class);
+                text.setText("Аккаунт пользователя");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
