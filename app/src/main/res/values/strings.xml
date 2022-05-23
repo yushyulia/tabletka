@@ -1,12 +1,27 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="tabletka_id">Таблетка</string>
-    <string name="welcome_id">Добро пожаловать!</string>
-    <string name="log_in_id">Войдите, чтобы не забывть принимать лекарства</string>
-    <string name="hint_email_id">Введите email</string>
-    <string name="hint_password_id">Введите пароль</string>
-    <string name="enter_button_id">Войти</string>
-    <string name="regist_button_id">Зарегистрироваться</string>
-    <string name="foget_button_id">Забыли пароль?</string>
-    <string name="withoutregistr_button_id">Войти без регистрации</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="log_in">Войдите, чтобы не забывать принимать лекарства</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Пароль</string>
+    <string name="enter_button">Войти</string>
+    <string name="regist_button">Зарегистрироваться</string>
+    <string name="forget_button">Забыли пароль?</string>
+    <string name="withoutregistr_button">Войти без регистрации</string>
+
+    <string name="authorization">Регистрация</string>
+    <string name="hint_name">Имя</string>
+    <string name="hint_bday">Дата рождения</string>
+    <string name="hint_weight">Вес</string>
+    <string name="hint_repeatpasswd">Пароль еще раз</string>
+
+    <string name="acc_email">Email</string>
+    <string name="acc_name">Имя</string>
+    <string name="acc_bday">Дата рождения</string>
+    <string name="acc_weight">Вес</string>
+    <string name="acc_passwd">Пароль</string>
+    <string name="acc_button_save">Сохрарнить</string>
+    <string name="acc_button_exit">Выйти из аккаунта</string>
+
 </resources>
