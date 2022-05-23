@@ -8,27 +8,181 @@
     tools:context=".AccountActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="146dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/acc_email_id"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="144dp"
-        android:layout_marginEnd="149dp"
-        android:layout_marginBottom="426dp"
-        android:text="Аккаунт" />
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="250dp"
+        android:fontFamily="@font/inter_semibold"
+        android:paddingTop="15dp"
+        android:text="@string/acc_email"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/acc_name_id"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/acc_email_id"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/inter_semibold"
+        android:paddingTop="15dp"
+        android:text="@string/acc_name"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+    <TextView
+        android:id="@+id/acc_bday_id"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/acc_name_id"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="@string/acc_bday"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:paddingTop="15dp"/>
+    <TextView
+        android:id="@+id/acc_weight_id"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/acc_bday_id"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="@string/acc_weight"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:paddingTop="15dp"/>
+    <TextView
+        android:id="@+id/acc_passwd_id"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/acc_weight_id"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="@string/acc_passwd"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:paddingTop="15dp"/>
+
+    <EditText
+        android:id="@+id/acc_email_text"
+        android:layout_width="130dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="53sp"
+        android:layout_marginTop="250dp"
+        android:layout_toEndOf="@+id/acc_email_id"
+        android:background="@drawable/rectangle"
+        android:fontFamily="@font/inter_semibold"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/acc_name_text"
+        android:layout_width="130dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/acc_email_text"
+        android:layout_marginHorizontal="53sp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/acc_name_id"
+        android:background="@drawable/rectangle"
+        android:fontFamily="@font/inter_semibold"
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+    <EditText
+        android:id="@+id/acc_bday_text"
+        android:layout_width="130dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/acc_name_text"
+        android:layout_marginHorizontal="53sp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/acc_bday_id"
+        android:background="@drawable/rectangle"
+        android:fontFamily="@font/inter_semibold"
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+    <EditText
+        android:id="@+id/acc_weight_text"
+        android:layout_width="130dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/acc_bday_text"
+        android:layout_marginHorizontal="53sp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/acc_weight_id"
+        android:background="@drawable/rectangle"
+        android:fontFamily="@font/inter_semibold"
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+    <EditText
+        android:id="@+id/acc_passwd_text"
+        android:layout_width="130dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/acc_weight_text"
+        android:layout_marginHorizontal="53sp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/acc_passwd_id"
+        android:background="@drawable/rectangle"
+        android:fontFamily="@font/inter_semibold"
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+
+    <Button
+        android:id="@+id/save_btn"
+        android:layout_width="280dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="50sp"
+        android:layout_marginTop="565dp"
+        android:background="@drawable/rectangle_button_orange"
+        android:fontFamily="@font/inter_semibold"
+        android:text="@string/acc_button_save"
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/exit_btn"
-        android:layout_width="183dp"
-        android:layout_height="75dp"
-        android:layout_above="@+id/textView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="125dp"
-        android:layout_marginEnd="132dp"
-        android:layout_marginBottom="76dp"
-        android:text="Выйти из аккаунта" />
+        android:layout_width="280dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/save_btn"
+        android:layout_marginHorizontal="50sp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rectangle_button_white"
+        android:fontFamily="@font/inter_semibold"
+        android:text="@string/acc_button_exit"
+        android:textColor="@color/blue" />
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="120sp"
+        android:layout_marginTop="70dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <View
+        android:id="@+id/vector"
+        android:layout_width="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="690dp"
+        android:background="@drawable/Vector" />
 
 </RelativeLayout>
