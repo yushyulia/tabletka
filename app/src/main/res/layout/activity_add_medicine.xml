@@ -26,6 +26,7 @@
         android:layout_marginEnd="40dp"
         android:layout_toStartOf="@+id/medname_id"
         android:background="@drawable/add_med_btn" />
+
     <TextView
         android:id="@+id/dosage_id"
         android:layout_width="wrap_content"
@@ -33,7 +34,7 @@
         android:layout_marginTop="100dp"
         android:fontFamily="@font/inter_semibold"
         android:paddingLeft="50dp"
-        android:text="Дозировка"
+        android:text="@string/add_medicine_dosage"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
@@ -52,7 +53,7 @@
         android:layout_marginTop="180dp"
         android:fontFamily="@font/inter_semibold"
         android:paddingLeft="50dp"
-        android:text="Единицы измерения"
+        android:text="@string/add_medicine_units"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
@@ -71,7 +72,7 @@
         android:layout_marginTop="350dp"
         android:fontFamily="@font/inter_semibold"
         android:paddingLeft="50dp"
-        android:text="Прием 1"
+        android:text="@string/add_medicine_reception"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
@@ -117,7 +118,7 @@
         android:layout_marginTop="440dp"
         android:fontFamily="@font/inter_semibold"
         android:paddingLeft="50dp"
-        android:text="Напоминать"
+        android:text="@string/add_medicine_remind"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
@@ -137,7 +138,7 @@
         android:layout_marginTop="26dp"
         android:fontFamily="@font/inter_semibold"
         android:paddingLeft="50dp"
-        android:text="Дни приема"
+        android:text="@string/add_medicine_days"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
@@ -158,7 +159,7 @@
         android:layout_marginTop="26dp"
         android:fontFamily="@font/inter_semibold"
         android:paddingLeft="50dp"
-        android:text="Начало"
+        android:text="@string/add_medicine_start"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
@@ -179,7 +180,7 @@
         android:layout_marginTop="26dp"
         android:fontFamily="@font/inter_semibold"
         android:paddingLeft="50dp"
-        android:text="Окончание"
+        android:text="@string/add_medicine_end"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
@@ -201,7 +202,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/rectangle_button_orange"
         android:fontFamily="@font/inter_semibold"
-        android:text="@string/acc_button_save"
+        android:text="@string/add_medicine_add_btn"
         android:textColor="@color/white" />
 
     <RadioGroup
@@ -217,7 +218,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="До еды" />
+            android:text="@string/add_medicine_eat1" />
 
         <RadioButton
             android:id="@+id/radio_blue"
@@ -225,7 +226,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="После еды" />
+            android:text="@string/add_medicine_eat2" />
 
         <RadioButton
             android:id="@+id/radio_green"
@@ -233,7 +234,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="Во время еды" />
+            android:text="@string/add_medicine_eat3" />
 
         <RadioButton
             android:id="@+id/radio_gray"
@@ -242,11 +243,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:checked="true"
-            android:text="Неважно" />
+            android:text="@string/add_medicine_eat4" />
     </RadioGroup>
-
-
-
-
 </RelativeLayout>
   
