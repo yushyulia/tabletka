@@ -150,7 +150,7 @@
         android:layout_width="280dp"
         android:layout_height="48dp"
         android:layout_alignParentTop="true"
-        android:layout_marginHorizontal="50sp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="565dp"
         android:background="@drawable/rectangle_button_orange"
         android:fontFamily="@font/inter_semibold"
@@ -162,7 +162,7 @@
         android:layout_width="280dp"
         android:layout_height="48dp"
         android:layout_below="@+id/save_btn"
-        android:layout_marginHorizontal="50sp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:background="@drawable/rectangle_button_white"
         android:fontFamily="@font/inter_semibold"
@@ -174,15 +174,16 @@
         android:id="@+id/imageView"
         android:layout_width="158dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="120sp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <View
-        android:id="@+id/vector"
-        android:layout_width="15dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="690dp"
-        android:background="@drawable/Vector" />
+    <Button
+        android:id="@+id/add_med_exit_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/add_med_btn" />
 
 </RelativeLayout>

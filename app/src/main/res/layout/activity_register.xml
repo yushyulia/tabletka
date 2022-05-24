@@ -22,7 +22,7 @@
         android:id="@+id/email"
         android:layout_width="280dp"
         android:layout_height="48dp"
-        android:layout_marginHorizontal="50sp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="220dp"
         android:background="@drawable/rectangle"
         android:fontFamily="@font/inter_semibold"
@@ -38,7 +38,7 @@
         android:layout_width="280dp"
         android:layout_height="48dp"
         android:layout_below="@+id/email"
-        android:layout_marginHorizontal="50sp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:background="@drawable/rectangle"
         android:fontFamily="@font/inter_semibold"
@@ -50,67 +50,67 @@
 
     <EditText
         android:id="@+id/birthday"
-        android:layout_below="@+id/name"
-        android:hint="@string/hint_bday"
-        android:inputType="date"
         android:layout_width="280dp"
         android:layout_height="48dp"
-        android:layout_marginHorizontal="50sp"
+        android:layout_below="@+id/name"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:background="@drawable/rectangle"
         android:fontFamily="@font/inter_semibold"
+        android:hint="@string/hint_bday"
+        android:inputType="date"
+        android:paddingLeft="16dp"
         android:textColor="@color/gray"
         android:textColorHint="@color/gray"
-        android:textSize="13sp"
-        android:paddingLeft="16dp"/>
+        android:textSize="13sp" />
 
     <EditText
         android:id="@+id/weight"
-        android:layout_below="@+id/birthday"
-        android:hint="@string/hint_weight"
-        android:inputType="numberDecimal"
         android:layout_width="280dp"
         android:layout_height="48dp"
-        android:layout_marginHorizontal="50sp"
+        android:layout_below="@+id/birthday"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:background="@drawable/rectangle"
         android:fontFamily="@font/inter_semibold"
+        android:hint="@string/hint_weight"
+        android:inputType="numberDecimal"
+        android:paddingLeft="16dp"
         android:textColor="@color/gray"
         android:textColorHint="@color/gray"
-        android:textSize="13sp"
-        android:paddingLeft="16dp"/>
+        android:textSize="13sp" />
 
     <EditText
         android:id="@+id/passwd"
-        android:layout_below="@+id/weight"
-        android:hint="@string/hint_password"
-        android:inputType="textPassword"
         android:layout_width="280dp"
         android:layout_height="48dp"
-        android:layout_marginHorizontal="50sp"
+        android:layout_below="@+id/weight"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:background="@drawable/rectangle"
         android:fontFamily="@font/inter_semibold"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"
+        android:paddingLeft="16dp"
         android:textColor="@color/gray"
         android:textColorHint="@color/gray"
-        android:textSize="13sp"
-        android:paddingLeft="16dp"/>
+        android:textSize="13sp" />
 
     <EditText
         android:id="@+id/rePasswd"
-        android:layout_below="@+id/passwd"
-        android:hint="@string/hint_repeatpasswd"
-        android:inputType="textPassword"
         android:layout_width="280dp"
         android:layout_height="48dp"
-        android:layout_marginHorizontal="50sp"
+        android:layout_below="@+id/passwd"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:background="@drawable/rectangle"
         android:fontFamily="@font/inter_semibold"
+        android:hint="@string/hint_repeatpasswd"
+        android:inputType="textPassword"
+        android:paddingLeft="16dp"
         android:textColor="@color/gray"
         android:textColorHint="@color/gray"
-        android:textSize="13sp"
-        android:paddingLeft="16dp"/>
+        android:textSize="13sp" />
 
     <Button
         android:id="@+id/btn_register"
@@ -118,18 +118,19 @@
         android:layout_height="48dp"
         android:layout_below="@id/rePasswd"
         android:layout_alignParentTop="true"
-        android:layout_marginHorizontal="50sp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="565dp"
         android:background="@drawable/rectangle_button_blue"
         android:fontFamily="@font/inter_semibold"
         android:text="@string/regist_button"
         android:textColor="@color/white" />
 
-    <View
-        android:id="@+id/vector"
-        android:layout_width="15dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="690dp"
-        android:background="@drawable/Vector" />
+    <Button
+        android:id="@+id/add_med_exit_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/add_med_btn" />
 
 </RelativeLayout>
