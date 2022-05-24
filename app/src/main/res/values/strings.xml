@@ -21,7 +21,21 @@
     <string name="acc_bday">Дата рождения</string>
     <string name="acc_weight">Вес</string>
     <string name="acc_passwd">Пароль</string>
-    <string name="acc_button_save">Сохрарнить</string>
+    <string name="acc_button_save">Сохранить</string>
     <string name="acc_button_exit">Выйти из аккаунта</string>
+
+    <string name="add_medicine_dosage">Дозировка</string>
+    <string name="add_medicine_units">Единицы измерения</string>
+    <string name="add_medicine_eat1">До еды</string>
+    <string name="add_medicine_eat2">После еды</string>
+    <string name="add_medicine_eat3">Во время еды</string>
+    <string name="add_medicine_eat4">Неважно</string>
+    <string name="add_medicine_reception">Прием 1</string>
+    <string name="add_medicine_add"><font color="#F2641A">Еще</font></string>
+    <string name="add_medicine_remind">Напоминать</string>
+    <string name="add_medicine_days">Дни приема</string>
+    <string name="add_medicine_start">Начало</string>
+    <string name="add_medicine_end">Окончание</string>
+    <string name="add_medicine_add_btn">Добавить</string>
 
 </resources>
