@@ -12,10 +12,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.myapplication.Models.User;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,7 +30,7 @@ import java.util.Date;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText email, name, birthday, weight, password, rePassword;
-    Button register;
+    Button register, back;
     FirebaseAuth auth;
     FirebaseDatabase db;
     DatabaseReference users;
@@ -46,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.passwd);
         rePassword = findViewById(R.id.rePasswd);
         register = findViewById(R.id.btn_register);
+        back = findViewById(R.id.back_register);
 
         auth = FirebaseAuth.getInstance();
         db=FirebaseDatabase.getInstance();
@@ -64,11 +68,6 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(TextUtils.isEmpty(birthday.getText().toString())){
-                    Toast.makeText(RegisterActivity.this, "Введите дату рождения", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 if(TextUtils.isEmpty(weight.getText().toString())){
                     Toast.makeText(RegisterActivity.this, "Введите вес", Toast.LENGTH_SHORT).show();
                     return;
@@ -79,38 +78,50 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                auth.createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                                String datee = birthday.getText().toString();
-                                try {
-                                    dateObject = formatter.parse(datee);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                                Float w = Float.valueOf(weight.getText().toString());
-
-                                User user = new User (name.getText().toString(), password.getText().toString(), email.getText().toString(),dateObject,w);
-
-                                users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                startActivity(new Intent(RegisterActivity.this,AccountActivity.class));
-                                                finish();
-                                            }
-                                        });
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(RegisterActivity.this, "Пользователь с таким email уже существует", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                register();
             }
         });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void register(){
+        auth.createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                            String datee = birthday.getText().toString();
+                            try {
+                                dateObject = formatter.parse(datee);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            Float w = Float.valueOf(weight.getText().toString());
+
+                            User u = new User (name.getText().toString(), password.getText().toString(), email.getText().toString(),dateObject,w);
+
+                            users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(u);
+                            FirebaseUser user = auth.getCurrentUser();
+                            updateUI(user);
+                            Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Не удалось зарегистироваться",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    private void updateUI(FirebaseUser user) {
     }
 }

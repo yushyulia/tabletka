@@ -126,7 +126,7 @@
         android:textColor="@color/white" />
 
     <Button
-        android:id="@+id/add_med_exit_btn"
+        android:id="@+id/back_register"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"

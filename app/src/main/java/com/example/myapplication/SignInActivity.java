@@ -11,8 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,21 +52,7 @@ public class SignInActivity extends AppCompatActivity {
                     Toast.makeText(SignInActivity.this, "Введите email", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                auth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString())
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                startActivity(new Intent(SignInActivity.this,AccountActivity.class));
-                                finish();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(SignInActivity.this, "Не удалось войти", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                signIn();
             }
         });
 
@@ -76,4 +64,27 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
     }
+    
+    private void signIn(){
+        auth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString())
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = auth.getCurrentUser();
+                            updateUI(user);
+                            Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(SignInActivity.this, "Не удалось войти",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    private void updateUI(FirebaseUser user) {
+    }
+
 }

@@ -1,6 +1,10 @@
 package com.example.myapplication.Models;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
     private String name, password, email;
@@ -55,5 +59,17 @@ public class User {
 
     public void setWeight(Float weight) {
         this.weight = weight;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("name", name);
+        result.put("password", password);
+        result.put("email", email);
+        result.put("birthday", birthday);
+        result.put("weight", weight);
+
+        return result;
     }
 }
