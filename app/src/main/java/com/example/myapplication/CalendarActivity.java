@@ -33,8 +33,8 @@ public class CalendarActivity extends AppCompatActivity {
     List<Medicine> listTemp;
 
     FirebaseDatabase db;
-    DatabaseReference medicine;
-    String uid;
+    DatabaseReference medicineDB;
+    String uid, med_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
         db = FirebaseDatabase.getInstance();
-        medicine = db.getReference("Medicine/"+uid);
+        medicineDB = db.getReference("Medicine/"+uid);
 
         getMedicine();
         setOnClickItem();
@@ -90,14 +90,15 @@ public class CalendarActivity extends AppCompatActivity {
 
             }
         };
-        medicine.addValueEventListener(valueEventListener);
+        medicineDB.addValueEventListener(valueEventListener);
     }
 
     private void setOnClickItem(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Medicine medicine = listTemp.get(i);
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Medicine medicine = listTemp.get(position);
+                med_id = medicine.getId();
 
                 Intent intent = new Intent(CalendarActivity.this,ChangeMedicineActivity.class);
                 intent.putExtra("med_id",medicine.getId());
@@ -114,5 +115,9 @@ public class CalendarActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void deleteMedicine(){
+        medicineDB.child("/" + med_id).removeValue();
     }
 }
