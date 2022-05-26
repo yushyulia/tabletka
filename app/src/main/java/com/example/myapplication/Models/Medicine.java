@@ -4,23 +4,33 @@ import com.google.firebase.database.Exclude;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Medicine {
-    private String name, applying, units;
+    private String id, name, applying, units, firstDay, lastDay;
     private String dosage;
-    private Date firstDay;
-    private Date lastDay;
+    private Reminder reminder;
 
     public  Medicine() {}
 
-    public Medicine(String name, String dosage, String units, String applying, Date firstDay, Date lastDay) {
+    public Medicine(String id,String name, String dosage, String units, String applying, String firstDay, String lastDay, Reminder reminder) {
+        this.id = id;
         this.name = name;
         this.dosage = dosage;
         this.units = units;
         this.applying = applying;
         this.firstDay = firstDay;
         this.lastDay = lastDay;
+        this.reminder = reminder;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getApplying() {
@@ -55,20 +65,28 @@ public class Medicine {
         this.dosage = dosage;
     }
 
-    public Date getFirstDay() {
+    public String getFirstDay() {
         return firstDay;
     }
 
-    public void setFirstDay(Date firstDay) {
+    public void setFirstDay(String firstDay) {
         this.firstDay = firstDay;
     }
 
-    public Date getLastDay() {
+    public String getLastDay() {
         return lastDay;
     }
 
-    public void setLastDay(Date lastDay) {
+    public void setLastDay(String lastDay) {
         this.lastDay = lastDay;
+    }
+
+    public Reminder getReminder() {
+        return reminder;
+    }
+
+    public void setReminder(Reminder reminder) {
+        this.reminder = reminder;
     }
 
     @Exclude
@@ -80,7 +98,8 @@ public class Medicine {
         result.put("dosage", dosage);
         result.put("firstDay", firstDay);
         result.put("lastDay", lastDay);
-
+        result.put("reminder",reminder);
+        result.put("id",id);
         return result;
     }
 }

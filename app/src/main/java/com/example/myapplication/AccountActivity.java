@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myapplication.Models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,16 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +28,6 @@ public class AccountActivity extends AppCompatActivity {
     DatabaseReference dbRef;
     FirebaseAuth auth;
     String uid;
-    Date dateObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,16 +98,10 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void changeUserInfo(){
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        String datee = user_birthday.getText().toString();
-        try {
-            dateObject = formatter.parse(datee);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         Float w = Float.valueOf(user_weight.getText().toString());
 
-        User u = new User (user_name.getText().toString(), user_password.getText().toString(), user_email.getText().toString(),dateObject,w);
+        User u = new User (user_name.getText().toString(), user_password.getText().toString(), user_email.getText().toString(),
+                user_birthday.getText().toString(),w);
 
         Map<String, Object> userValues = u.toMap();
 

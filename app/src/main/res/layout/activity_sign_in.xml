@@ -58,10 +58,10 @@
         android:fontFamily="@font/inter_semibold"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
+        android:paddingLeft="16dp"
         android:textColor="@color/gray"
         android:textColorHint="@color/gray"
-        android:textSize="13sp"
-        android:paddingLeft="16dp"/>
+        android:textSize="13sp" />
 
     <Button
         android:id="@+id/btn_signIn"

@@ -178,7 +178,7 @@
 
 
     <Button
-        android:id="@+id/add_btn"
+        android:id="@+id/save_change_btn"
         android:layout_width="280dp"
         android:layout_height="48dp"
         android:layout_below="@+id/end_id"
@@ -186,7 +186,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/rectangle_button_orange"
         android:fontFamily="@font/inter_semibold"
-        android:text="@string/add_medicine_add_btn"
+        android:text="@string/change_medicine_save_btn"
         android:textColor="@color/white" />
 
     <RadioGroup
@@ -239,7 +239,7 @@
         android:layout_marginTop="1dp"
         android:layout_toEndOf="@+id/start_id"
         android:ems="10"
-        android:inputType="date" />
+        android:inputType="date"/>
 
     <EditText
         android:id="@+id/endTextDate"

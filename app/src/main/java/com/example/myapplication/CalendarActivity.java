@@ -78,8 +78,6 @@ public class CalendarActivity extends AppCompatActivity {
                 if(listTemp.size()>0)listTemp.clear();
                 for(DataSnapshot ds : snapshot.getChildren()){
                     Medicine med = ds.getValue(Medicine.class);
-                    med.setFirstDay(null);
-                    med.setLastDay(null);
                     assert med != null;
                     listMedicine.add(med.getName());
                     listTemp.add(med);
@@ -102,10 +100,17 @@ public class CalendarActivity extends AppCompatActivity {
                 Medicine medicine = listTemp.get(i);
 
                 Intent intent = new Intent(CalendarActivity.this,ChangeMedicineActivity.class);
+                intent.putExtra("med_id",medicine.getId());
                 intent.putExtra("med_name",medicine.getName());
                 intent.putExtra("med_dosage",medicine.getDosage());
                 intent.putExtra("med_units",medicine.getUnits());
                 intent.putExtra("med_applying",medicine.getApplying());
+                intent.putExtra("first_day",medicine.getFirstDay());
+                intent.putExtra("last_day",medicine.getLastDay());
+                intent.putExtra("time_remind",medicine.getReminder().getTime());
+                intent.putExtra("day_remind",medicine.getReminder().getDays());
+                intent.putExtra("moment_remind",medicine.getReminder().getMoment());
+
                 startActivity(intent);
             }
         });

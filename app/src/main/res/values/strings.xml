@@ -37,5 +37,7 @@
     <string name="add_medicine_start">Начало</string>
     <string name="add_medicine_end">Окончание</string>
     <string name="add_medicine_add_btn">Добавить</string>
+    <string name="change_medicine_save_btn">Сохранить</string>
+
 
 </resources>

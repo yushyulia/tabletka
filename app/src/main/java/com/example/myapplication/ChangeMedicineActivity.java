@@ -13,19 +13,24 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.example.myapplication.Models.Medicine;
+import com.example.myapplication.Models.Reminder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ChangeMedicineActivity extends AppCompatActivity {
 
-    EditText medicineName;
+    EditText medicineName, firstDay, lastDay, time;
     Spinner dosageSpinner, unitsSpinner, remindSpinner, daysSpinner;
-    Button addMedicineButton, back_btn;
+    Button editMedicineButton, back_btn;
     RadioGroup applying;
     RadioButton radio_btn;
-    String uid;
+    String uid, med_id;
 
     String[] dosage = {"Расчет по весу","Ввести значение самостоятельно"};
     String[] units = {"ампулы","граммы","капли","чайная ложка", "столовая ложка", "таблетки", "штука"};
@@ -35,6 +40,7 @@ public class ChangeMedicineActivity extends AppCompatActivity {
     String med_dosage,med_unit,med_remind,med_day,med_applying;
 
     DatabaseReference db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,13 +53,16 @@ public class ChangeMedicineActivity extends AppCompatActivity {
         }
 
         medicineName = findViewById(R.id.medname_id);
+        firstDay = findViewById(R.id.startTextDate);
+        lastDay = findViewById(R.id.endTextDate);
+        time = findViewById(R.id.time_id);
 
         dosageSpinner = findViewById(R.id.dosage_spinner);
         unitsSpinner = findViewById(R.id.units_spinner);
         remindSpinner = findViewById(R.id.remind_spinner);
         daysSpinner = findViewById(R.id.days_spinner);
 
-        addMedicineButton = findViewById(R.id.add_btn);
+        editMedicineButton = findViewById(R.id.save_change_btn);
         back_btn = findViewById(R.id.change_med_exit_btn);
 
         applying = findViewById(R.id.radioGroup);
@@ -153,10 +162,18 @@ public class ChangeMedicineActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        editMedicineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeMedicine();
+            }
+        });
     }
 
     private void getMedIntent(){
         Intent intent = getIntent();
+        med_id = intent.getStringExtra("med_id");
         if(intent != null){
             medicineName.setText(intent.getStringExtra("med_name"));
             for(int i = 0; (i<dosage.length); i++){
@@ -169,6 +186,33 @@ public class ChangeMedicineActivity extends AppCompatActivity {
                     unitsSpinner.setSelection(i);
                 }
             }
+            for(int i = 0; (i<remind.length); i++){
+                if (remind[i].equals(intent.getStringExtra("moment_remind"))){
+                    remindSpinner.setSelection(i);
+                }
+            }
+            for(int i = 0; (i<days.length); i++){
+                if (days[i].equals(intent.getStringExtra("day_remind"))){
+                    daysSpinner.setSelection(i);
+                }
+            }
+            firstDay.setText(String.valueOf(intent.getStringExtra("first_day")));
+            lastDay.setText(String.valueOf(intent.getStringExtra("last_day")));
+            time.setText(String.valueOf(intent.getStringExtra("time_remind")));
         }
+    }
+
+    private void changeMedicine(){
+        Reminder reminder = new Reminder(time.getText().toString(),med_remind,med_day);
+        Medicine med = new Medicine(med_id,medicineName.getText().toString(),med_dosage,med_unit,med_applying,
+                firstDay.getText().toString(),lastDay.getText().toString(),reminder);
+        Map<String, Object> medValues = med.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/Medicine/" + uid + "/" + med_id, medValues);
+        db.updateChildren(childUpdates);
+
+        Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
+        startActivity(intent);
     }
 }

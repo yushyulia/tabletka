@@ -7,13 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User {
-    private String name, password, email;
-    private Date birthday;
+    private String name, password, email, birthday;
     private Float weight;
 
     public User() {}
 
-    public User(String name, String password, String email, Date birthday, Float weight) {
+    public User(String name, String password, String email, String birthday, Float weight) {
         this.name = name;
         this.password = password;
         this.email = email;
@@ -45,11 +44,11 @@ public class User {
         this.email = email;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

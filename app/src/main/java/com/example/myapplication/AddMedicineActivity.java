@@ -14,17 +14,20 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.example.myapplication.Models.Medicine;
+import com.example.myapplication.Models.Reminder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AddMedicineActivity extends AppCompatActivity {
 
-    EditText medicineName;
+    EditText medicineName, firstDay, lastDay, time;
     Spinner dosageSpinner, unitsSpinner, remindSpinner, daysSpinner;
     Button addMedicineButton, back_btn;
     RadioGroup applying;
@@ -52,6 +55,9 @@ public class AddMedicineActivity extends AppCompatActivity {
         }
 
         medicineName = findViewById(R.id.medname_id);
+        firstDay = findViewById(R.id.startTextDate);
+        lastDay = findViewById(R.id.endTextDate);
+        time = findViewById(R.id.time_id);
 
         dosageSpinner = findViewById(R.id.dosage_spinner);
         unitsSpinner = findViewById(R.id.units_spinner);
@@ -167,7 +173,9 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     private void addMedicine(){
         String key = db.child("Medicine").push().getKey();
-        Medicine med = new Medicine(medicineName.getText().toString(),med_dosage,med_unit,med_applying,null,null);
+        Reminder reminder = new Reminder(time.getText().toString(),med_remind,med_day);
+        Medicine med = new Medicine(key,medicineName.getText().toString(),med_dosage,med_unit,med_applying,
+                firstDay.getText().toString(),lastDay.getText().toString(),reminder);
         Map<String, Object> medValues = med.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

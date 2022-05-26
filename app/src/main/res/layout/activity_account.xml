@@ -102,6 +102,7 @@
         android:paddingLeft="16dp"
         android:textColor="@color/black"
         android:textSize="13sp" />
+
     <EditText
         android:id="@+id/acc_bday_text"
         android:layout_width="130dp"
@@ -113,6 +114,7 @@
         android:layout_toEndOf="@+id/acc_bday_id"
         android:background="@drawable/rectangle"
         android:fontFamily="@font/inter_semibold"
+        android:inputType="date"
         android:paddingLeft="16dp"
         android:textColor="@color/black"
         android:textSize="13sp" />
@@ -131,6 +133,7 @@
         android:paddingLeft="16dp"
         android:textColor="@color/black"
         android:textSize="13sp" />
+
     <EditText
         android:id="@+id/acc_passwd_text"
         android:layout_width="130dp"
@@ -142,6 +145,7 @@
         android:layout_toEndOf="@+id/acc_passwd_id"
         android:background="@drawable/rectangle"
         android:fontFamily="@font/inter_semibold"
+        android:inputType="textPassword"
         android:paddingLeft="16dp"
         android:textColor="@color/black"
         android:textSize="13sp" />
@@ -173,23 +177,22 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="158dp"
-        android:layout_height="wrap_content"
+        android:layout_width="164dp"
+        android:layout_height="166dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/user2" />
 
-    <Button
-        android:id="@+id/add_med_exit_btn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/add_med_btn" />
+<!--    <Button-->
+<!--        android:id="@+id/add_med_exit_btn"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="40dp"-->
+<!--        android:background="@drawable/add_med_btn" />-->
 
     <Button
         android:id="@+id/calendar_btn"
-        android:text="Календарь"
         android:layout_width="280dp"
         android:layout_height="48dp"
         android:layout_alignParentTop="true"
@@ -197,6 +200,7 @@
         android:layout_marginTop="515dp"
         android:background="@drawable/rectangle_button_orange"
         android:fontFamily="@font/inter_semibold"
+        android:text="Список лекарств"
         android:textColor="@color/white" />
 
 </RelativeLayout>
