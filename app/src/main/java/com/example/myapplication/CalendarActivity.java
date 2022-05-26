@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -26,8 +27,11 @@ public class CalendarActivity extends AppCompatActivity {
 
     ListView listView;
     Button addMedicine;
+
     ArrayAdapter<String> adapter;
     List<String> listMedicine;
+    List<Medicine> listTemp;
+
     FirebaseDatabase db;
     DatabaseReference medicine;
     String uid;
@@ -41,6 +45,7 @@ public class CalendarActivity extends AppCompatActivity {
         addMedicine = findViewById(R.id.add_med_btn);
 
         listMedicine = new ArrayList<>();
+        listTemp = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,listMedicine);
         listView.setAdapter(adapter);
 
@@ -53,6 +58,7 @@ public class CalendarActivity extends AppCompatActivity {
         medicine = db.getReference("Medicine/"+uid);
 
         getMedicine();
+        setOnClickItem();
 
         addMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,12 +75,14 @@ public class CalendarActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 if(listMedicine.size()>0)listMedicine.clear();
+                if(listTemp.size()>0)listTemp.clear();
                 for(DataSnapshot ds : snapshot.getChildren()){
                     Medicine med = ds.getValue(Medicine.class);
                     med.setFirstDay(null);
                     med.setLastDay(null);
                     assert med != null;
                     listMedicine.add(med.getName());
+                    listTemp.add(med);
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -85,5 +93,21 @@ public class CalendarActivity extends AppCompatActivity {
             }
         };
         medicine.addValueEventListener(valueEventListener);
+    }
+
+    private void setOnClickItem(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Medicine medicine = listTemp.get(i);
+
+                Intent intent = new Intent(CalendarActivity.this,ChangeMedicineActivity.class);
+                intent.putExtra("med_name",medicine.getName());
+                intent.putExtra("med_dosage",medicine.getDosage());
+                intent.putExtra("med_units",medicine.getUnits());
+                intent.putExtra("med_applying",medicine.getApplying());
+                startActivity(intent);
+            }
+        });
     }
 }

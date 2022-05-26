@@ -26,7 +26,6 @@ public class SignInActivity extends AppCompatActivity {
     EditText email,password;
     Button register,signIn;
     FirebaseAuth auth;
-    FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

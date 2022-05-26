@@ -26,7 +26,7 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     EditText medicineName;
     Spinner dosageSpinner, unitsSpinner, remindSpinner, daysSpinner;
-    Button addMedicineButton;
+    Button addMedicineButton, back_btn;
     RadioGroup applying;
     RadioButton radio_btn;
     String uid;
@@ -59,6 +59,7 @@ public class AddMedicineActivity extends AppCompatActivity {
         daysSpinner = findViewById(R.id.days_spinner);
 
         addMedicineButton = findViewById(R.id.add_btn);
+        back_btn = findViewById(R.id.add_med_exit_btn);
 
         applying = findViewById(R.id.radioGroup);
 
@@ -151,17 +152,29 @@ public class AddMedicineActivity extends AppCompatActivity {
         addMedicineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String key = db.child("Medicine").push().getKey();
-                Medicine med = new Medicine(medicineName.getText().toString(),med_dosage,med_unit,med_applying,null,null);
-                Map<String, Object> medValues = med.toMap();
-
-                Map<String, Object> childUpdates = new HashMap<>();
-                childUpdates.put("/Medicine/" + uid + "/" + key, medValues);
-                db.updateChildren(childUpdates);
-
-                Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
-                startActivity(intent);
+                addMedicine();
             }
         });
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddMedicineActivity.this,CalendarActivity.class));
+                finish();
+            }
+        });
+    }
+
+    private void addMedicine(){
+        String key = db.child("Medicine").push().getKey();
+        Medicine med = new Medicine(medicineName.getText().toString(),med_dosage,med_unit,med_applying,null,null);
+        Map<String, Object> medValues = med.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/Medicine/" + uid + "/" + key, medValues);
+        db.updateChildren(childUpdates);
+
+        Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
+        startActivity(intent);
     }
 }
